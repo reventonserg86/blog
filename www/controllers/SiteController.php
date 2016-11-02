@@ -13,11 +13,14 @@
 		 public function actionIndex()
 		 {
 
-		 	// Список категорий для левого меню
+		 	// Список категорий для меню
 		 	$categories = Category::getCategoriesList();
 
-		 	//Список рекомендованных заголовков статей
-		 	$arcRecomendTitle = Articles::getArticlesRecomTitleList();
+		 	//Список последних статей
+		 	$articlesList = Articles::getLatestArticles();
+
+		 	//Список рекомендованных статей
+		 	$recomendArticles = Articles::getArticlesRecomList();
 
 		 	//Подключаем вид страницы
 		 	require_once (ROOT . '/views/site/index.php');

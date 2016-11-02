@@ -5,18 +5,59 @@
     */
 		class Articles
 		{
+
+      // Количество отображаемых товаров по умолчанию
+      const SHOW_BY_DEFAULT = 2;
+
+      /**
+      * Возвращает массив последних статей
+      **/
+      public static function getLatestArticles($count = self::SHOW_BY_DEFAULT)
+      {
+
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        $sql = 'SELECT id, title, short_content, is_date '
+                      .'FROM articles '
+                      .'WHERE status = 1 ORDER BY id DESC '
+                      .'LIMIT :count';
+
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':count', $count, PDO::PARAM_INT);
+
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        
+        // Выполнение коменды
+        $result->execute();
+
+        // Получение и возврат результато
+        $i = 0;
+        $articlesList = array();
+        while($row = $result->fetch()){
+          $articlesList[$i]['id'] = $row['id'];
+          $articlesList[$i]['title'] = $row['title'];
+          $articlesList[$i]['short_content'] = $row['short_content'];
+          $articlesList[$i]['is_date'] = $row['is_date'];
+          $i++;
+        }
+        return $articlesList;
+      }
+
 			/**
       * Возвращает массив последних заголовков рукомендованных статей для списка на сайте
       **/
 
-			public static function getArticlesRecomTitleList()
+			public static function getArticlesRecomList()
 			{
 
 				// Соединение с БД
     		$db = Db::getConnection();
 
     		// Запрос к БД
-    		$result = $db -> query('SELECT id, title FROM articles WHERE is_recomended = "1"  ORDER BY is_date DESC');
+    		$result = $db -> query('SELECT id, title, short_content FROM articles WHERE is_recomended = "1"  ORDER BY is_date DESC LIMIT 3');
 
     		// Получение и возврат результатов
     		$i = 0;
@@ -24,6 +65,7 @@
     		while($row = $result->fetch()){
     			$recomArticlesTitleList[$i]['id'] = $row['id'];
     			$recomArticlesTitleList[$i]['title'] = $row['title'];
+          $recomArticlesTitleList[$i]['short_content'] = $row['short_content'];
     			$i++;
     		}
     		return $recomArticlesTitleList;
@@ -62,7 +104,7 @@
     		$db = Db::getConnection();
 
     		// Текст запроса к БД
-    		$sql = 'SELECT id, title FROM articles WHERE status = 1 AND category_id = :category_id ORDER BY is_date DESC';
+    		$sql = 'SELECT id, title, is_date, short_content FROM articles WHERE status = 1 AND category_id = :category_id ORDER BY is_date DESC';
 
     		// Используется подготовленный запрос
     		$result = $db->prepare($sql);
@@ -77,6 +119,8 @@
         while($row = $result->fetch()) {
         	$articles[$i]['id'] = $row['id'];
         	$articles[$i]['title'] = $row['title'];
+          $articles[$i]['is_date'] = $row['is_date'];
+          $articles[$i]['short_content'] = $row['short_content'];
         	$i++;
         }
         return $articles;

@@ -45,7 +45,7 @@
       $db = Db::getConnection();
 
       // Запрос к БД
-      $sql = 'SELECT * FROM category WHERE id=:id';
+      $sql = 'SELECT name FROM category WHERE id=:id';
 
       // Используется подготовленный запрос
       $result = $db->prepare($sql);

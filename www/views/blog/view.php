@@ -1,66 +1,76 @@
-<!DOCTYPE html>
+<?php include ROOT . '/views/layouts/header.php'; ?>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Eclipse by Free Css Templates</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="/template/css/default.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<div id="logo">
-	<h1><a href="#">Eclipse</a></h1>
-	<h2><a href="http://www.freecsstemplates.org/">By Free CSS Templates</a></h2>
-</div>
-<div id="menu">
-	<ul>
-		<li class="active first"><a href="/ " title="">Главная</a></li>
-		<li><a href="/blog/" title="">Блог</a></li>
-		<li><a href="/port/" title="">Портфолио</a></li>
-		<li><a href="/cont/" title="">Контакты</a></li>	</ul>
-</div>
-<!-- end #menu -->
-<div id="page">
-	<div id="content">
-		<div id="welcome" class="post">
-			<div class="title">
-				<h2><?php echo $article['title']; ?></h2>
-			</div>
-			<h3 class="date"><?php echo $article['is_date']; ?></h3>
-			<div class="meta">
-				<p>Posted by Jane Anderson under <a href="#">Uncategorized</a>, <a href="#">Daily Journal</a><br />
-					<a href="#">Trackback URI</a> | <a href="#">No Comments</a> | <a href="#">Permalink</a></p>
-			</div>
-			<div class="story"> <img src="<?php echo Articles::getImage($article['id']); ?>" alt="" width="112" height="112" class="left" />
-				<p><? echo $article['article']; ?></p>
-			</div>
-		</div>
-	</div>
-	<!-- end #content -->
-	<div id="sidebar">
-		<div class="boxed">
-			<div class="title">
-				<h2>Категории</h2>
-			</div>
-			<div class="content">
-				<ul class="list1">
-					<?php foreach($categories as $categoryItem): ?>
-						<li><a href="/category/<?php echo $categoryItem['id']; ?>">
-							<?php echo $categoryItem['name']; ?>
-						</a>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- end #sidebar -->
-	<div id="extra" style="clear: both;">&nbsp;</div>
-</div>
-<!-- end #page -->
-<div id="footer">
-	<p id="legal">Copyright &copy; 2007 Eclipse. All Rights Reserved. Designed by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
-	<p id="links"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
-</div>
-</body>
-</html>
+<div id="templatemo_content_wrapper">
+
+	<div id="templatemo_content">
+    
+    	<div class="post_section"><span class="bottom"></span>
+        
+          <h2><? echo $article['title'] ?></h2>
+
+            <strong>Дата:</strong> <?php echo $article['is_date'] ?>
+            
+          <img src="<? echo Articles::getImage($article['id']); ?>" alt="image 1" width="400px" />
+            
+             <p><? echo $article['article'] ?></p>
+             <div class="cleaner"></div>
+            <div class="category">Категория: <a href="/category/<? echo $article['category_id'] ?>">
+	            <?php 
+	            	$categor = Category::getCategoryById($article['category_id']);
+	            	$categName = $categor['name'];
+	            	echo $categName;
+	             ?>
+            </a></div>
+			<div class="cleaner"></div>
+            
+            <div class="comment_tab">
+            	<? /*echo $countComments;*/ ?> Комментариев
+            </div>
+            
+            <div id="comment_section">
+                <ol class="comments first_level">
+                        
+                        <li>
+                            <div class="comment_box commentbox1">
+                                    
+                                <div class="gravatar">
+                                    <img src="/template/images/avator1.png" alt="author 1" />
+                                </div>
+                                
+                                <div class="comment_text">
+                                    <div class="comment_author">Гость<span class="date">24 August 2048</span><span class="time">12:12 pm</span></div>
+                                    <p>Phasellus dictum ornare nulla ac laoreet. Phasellus mattis tellus eu risusLorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet. Phasellus mattis tellus eu risus</p>
+                                </div>
+                                <div class="cleaner"></div>
+                            </div>                          
+                        </li>                        
+              		</ol>
+         		 </div>
+                
+                <div id="comment_form">
+                    <h3>Оставить комментарий</h3>
+                    
+                    <form action="#" method="post">
+                        <div class="form_row">
+                            <label>Имя</label><br />
+                            <input type="text" name="name" value="Гость" />
+                        </div>
+                        <div class="form_row">
+                            <label>Email  ( не обязательно)</label><br />
+                            <input type="text" name="name" />
+                        </div>
+                        <div class="form_row">
+                            <label>Ваш комментарий</label><br />
+                            <textarea  name="comment" rows="" cols=""></textarea>
+                        </div>
+
+                        <input type="submit" name="Submit" value="Отправить" class="submit_btn" />
+                    </form>
+                    
+                </div>
+
+        </div>
+    
+  	</div> <!-- end of content -->
+
+<?php include ROOT . '/views/layouts/footer.php'; ?>

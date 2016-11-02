@@ -20,6 +20,9 @@
      		// Выводим статью
      		$article = Articles::getArticleById($articleId);
 
+            //Список рекомендованных статей
+            $recomendArticles = Articles::getArticlesRecomList();
+
      		// Подключаем вид
         require_once(ROOT . '/views/blog/view.php');
         return true;

@@ -57,7 +57,7 @@
                         <input type="file" name="image" placeholder="" value="">
 
                         <p>Дата</p>
-                        <input type="text" name="is_date" placeholder="" value="">
+                        <input type="date" name="is_date" placeholder="" value="">
 
                         <br/><br/>
 

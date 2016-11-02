@@ -19,8 +19,8 @@
      		$listArticleTitle = Articles::getArticleTitleList();
 
      		// Подключаем вид
-        require_once(ROOT . '/views/blog/index.php');
-        return true;
+            require_once(ROOT . '/views/blog/index.php');
+            return true;
      }
 
     /**
@@ -34,6 +34,9 @@
 
      		// Список статей в категории
      		$categoryArticles = Articles::getArticlesListByCategory($categoryId);
+
+            //Список рекомендованных статей
+            $recomendArticles = Articles::getArticlesRecomList();
 
      		// Подключаем вид
         require_once(ROOT . '/views/blog/category.php');

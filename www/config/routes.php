@@ -2,6 +2,9 @@
 
 	return array(
 
+		'contacts' => 'contacts/index', //actionIndex в ContactsController
+		'services' => 'services/index', //actionIndex в ServicesController
+		'portfolio' => 'portfolio/index', //actionIndex в PortfolioController
 		'article/([0-9]+)' => 'article/view/$1', //actionView in ArticleController
 		'blog' => 'blog/index', //actionIndex in BlogController
 		'category/([0-9]+)' => 'blog/category/$1', // actionCategory в BlogController
